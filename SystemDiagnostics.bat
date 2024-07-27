@@ -18,10 +18,10 @@ echo User Name: >> %outputFile%
 echo %USERNAME% >> %outputFile%
 
 echo. >> %outputFile%
-echo IP Address: >> %outputFile%
-for /f "tokens=2 delims=:" %%a in ('ipconfig ^| findstr /R "IPv4"') do (
-    set ipAddress=%%a
-    echo !ipAddress:~1! >> %outputFile%
+echo Public IP Address: >> %outputFile%
+for /f "delims=" %%a in ('curl -s https://ident.me') do (
+    set "ipAddress=%%a"
+    echo !ipAddress! >> %outputFile%
 )
 
 echo. >> %outputFile%
